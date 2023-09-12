@@ -26,6 +26,9 @@ Link Adaptable : https://hilmeezy-records.adaptable.app/
 
 
 - Bagan Request Client
+
+![bagan_request_client](https://github.com/m-hilmy-erryanto/hilmeezy-records/assets/118323734/448bed1d-9fb1-425c-aa9f-e2510aa6f04d)
+
     1. Client melakukan http request ke url
     2. Server menjalankan fungsi Views sesuai request client
     3. Views mengakses Models
