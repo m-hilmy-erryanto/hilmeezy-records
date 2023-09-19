@@ -87,7 +87,12 @@ Tugas 3
 
 - Screenshot Postman
     1. HTML
+    ![HTML](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/HTML.png)
     2. JSON
+    ![JSON](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/JSON.png)
     3. XML
+    ![XML](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/XML.png)
     4. JSON by ID
+    ![JSON by ID](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/JSON%20by%20ID.png)
     5. XML by ID
+    ![XML by ID](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/XML%20by%20ID.png)
