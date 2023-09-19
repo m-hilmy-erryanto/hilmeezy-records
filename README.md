@@ -96,3 +96,6 @@ Tugas 3
     ![JSON by ID](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/JSON%20by%20ID.png)
     5. XML by ID
     ![XML by ID](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/XML%20by%20ID.png)
+
+- Bonus:
+    Saya berhasil menambahkan pesan dan menampilkannya di atas tabel data. Pesan yang ditampilkan adalah "You have stored x records in this application". Hal ini diimplementasikan dengan menambahkan line <span>You have stored {{ records|length }} records in this application</span> di main.html dengan {{ records|length}} untuk mencari banyak data dalam tabel.
