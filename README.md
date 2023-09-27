@@ -113,6 +113,8 @@ Tugas 4
 
     2. Membuat dua akun pengguna dengan masing-masing tiga dummy data:
         Saya membuat akun pengguna dengan melakukan registrasi sebanyak dua kali. Lalu setelah berhasil registrasi saya login pada masing-masing akun, pada halaman main, saya menambahkan record sebanyak 3 kali. Berikut gambarnya:
+        ![USER1](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/User%201.png)
+        ![USER2](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/User%202.png)
 
     3. Menghubungkan model Record dengan User:
         Cara saya menghubungkan model Record dengan user adalah dengan menambahkan atribut user sebagai foreign key di Record. Lalu, saya mengubah fungsi show_main dan create_record di views agar penggunaan dua fungsi tersebut hanya bisa diakses oleh user yang sedang login.
