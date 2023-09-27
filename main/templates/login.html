@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <style>
+    span {
+    display: inline;
+    }
+    a.button {
+        display: inline-block;
+        text-decoration: none;
+        background-color: transparent;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Helvetica Neue', sans-serif;
+        border: 2px solid white;
+        margin-left: 10px;
+    }
+    </style>
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    <span>Don't have an account yet?</span>
+    <a href="{% url 'main:register' %}" class="button">Register Now</a>
+
+
+</div>
+
+{% endblock content %}

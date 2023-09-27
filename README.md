@@ -99,3 +99,41 @@ Tugas 3
 
 - Bonus:
     Saya berhasil menambahkan pesan dan menampilkannya di atas tabel data. Pesan yang ditampilkan adalah "You have stored x records in this application". Hal ini diimplementasikan dengan menambahkan line <span>You have stored {{ records|length }} records in this application</span> di main.html dengan {{ records|length}} untuk mencari banyak data dalam tabel.
+
+Tugas 4
+- Pengimplementasian Checklist
+    1. Mengimplementasikan fungsi registrasi, login, dan logout:
+        Sebelumnya saya mengubah main.html menjadi restricted agar pengguna yang sudah login saja yang bisa mengaksesnya.
+        - Registrasi:
+            Registrasi dilakukan dengan membuat register.html dan fungsi register pada views. register.html akan menjadi halaman untuk user meregister akun. Pada register.html, user diminta untuk memasukan username dan password yang mereka mau.
+        - Login:
+            Login dilakukan dengan membuat login.html dan fungsi login_user pada views. login.html akan menjadi halamn untuk user login. User tidak akan bisa pindah ke main.html jika belum berhasil login.
+        - Logout:
+            Logout dilakukan dengan membuat fungsi logout_user pada views. Fungsi logout_user ini akan dipanggil saat user menekan tombol Logout yang sudah saya buat di main.html.
+
+    2. Membuat dua akun pengguna dengan masing-masing tiga dummy data:
+        Saya membuat akun pengguna dengan melakukan registrasi sebanyak dua kali. Lalu setelah berhasil registrasi saya login pada masing-masing akun, pada halaman main, saya menambahkan record sebanyak 3 kali. Berikut gambarnya:
+
+    3. Menghubungkan model Record dengan User:
+        Cara saya menghubungkan model Record dengan user adalah dengan menambahkan atribut user sebagai foreign key di Record. Lalu, saya mengubah fungsi show_main dan create_record di views agar penggunaan dua fungsi tersebut hanya bisa diakses oleh user yang sedang login.
+
+    4. Menampilkan username pengguna yang sedang logged in seperti username dan menerapkan last login:
+        Cara saya menampilkan username pengguna yang sedang login adalah dengan menambahkan line "<span>Welcome back, {{ name }}!<span>". Lalu untuk last login saya menambahkan line "<h5>Sesi terakhir login: {{ last_login }}</h5>" di main.html dengan last_login dipanggil dari context yang ada di fungsi show_main. name dan last_login merupakan context yang ada di show_main. Kedua penambahan dilakukan di main.html
+
+- Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+    Django UserCreationForm adalah formulir yang ada di Django yang bisa digunakan untuk membuat akun baru di aplikasi web. Kelebihan dari UserCreationForm adalah sudah terintegrasi dengan Django User Model dan adanya keamanan untuk serangan seperti CSRF (Cross-Site Request Forgery) dan XSS (Cross-Site Scripting). Kekurangan dari UserCreationForm adalah tampilan defaultnya kurang bagus.
+
+- Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+    Autentikasi adalah proses untuk memastikan siapa yang sedang login. Otorisasi adalah proses untuk memastikan apakah user memiliki akses untuk melakukan suatu hal. Keduanya penting untuk memastikan keamanan aplikasi kita agar tidak ada orang asing yang menggunakan aplikasi kita.
+
+- Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+    Cookies adalah data yang disimpan oleh server web pada device pengguna. pada perangkat pengguna. Django menggunakannya dengan membuat cookies dan menyimpannya di awal, lalu selama pengguna menggunakan web, data sesi akan diperbarui sesuai aktivitas pengguna. Saat pengguna logout, cookies akan dihapus.
+
+- Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+    Penggunaan cookies secara default belum aman. Contoh risiko potensialnya adalah serangan CSRF dan XSS, serta penyalahgunaan cookies.
+
+- Bonus:
+    1. Tombol dan fungsi untuk menambahkan dan mengurangi jumlah objek:
+        Saya membuat tombol "+1" dan "-1" yang terletak di kolom action. Kedua tombol ini menjalankan fungsi yang sesuai dengan masing-masing, +1 menjalankan fungsi add_one, -1 menjalankan remove_one.
+    2. Tombol dan fungsi untuk menghapus objek:
+        Sama juga seperti +1 dan -1, tombol Del yang terletak di kolom action bisa meremove object. Tombol ini menjalankan fungsi delete_record.

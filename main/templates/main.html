@@ -1,42 +1,92 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <h1>{{ application_name}} Page</h1>
 
 <h3>Hilmy's record store</h3>
-
-
-<span>You have stored {{ records|length }} records in this application</span>
-
-
-<table style="border-spacing: 1rem;">
-    <tr >
-        <th style="padding-left: 5px;padding-right: 5px;">Name</th>
-        <th style="padding-left: 5px;padding-right: 5px;">Amount</th>
-        <th style="padding-left: 5px;padding-right: 5px;">Description</th>
-        <th style="padding-left: 5px;padding-right: 5px;">Genre</th>
-        <th style="padding-left: 5px;padding-right: 5px;">Price</th>
-        <th style="padding-left: 5px;padding-right: 5px;">Date Added</th>
+<span>Welcome back, {{ name }}! You have stored {{ records|length }} records in this application</span>
+<style>
+    table {
+    border-spacing: 1rem;
+    }
+    th, td {
+      text-align: center;
+      padding: 5px;
+    }
+    th:nth-child(3) {
+      max-width: 200px;
+    }
+    td.description {
+    max-width: 200px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+    }
+    h1, h3, span {
+    font-family: "Helvetica", sans-serif;
+    }
+    a.button {
+        text-decoration: none;
+        background-color: transparent;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Helvetica Neue', sans-serif;
+        border: 2px solid white;
+        margin-right: 10px;
+    }
+    img{
+      width: 10%;
+    }
+  </style>
+  
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Genre</th>
+      <th>Price</th>
+      <th>Date Added</th>
+      <th>Action</th>
     </tr>
-
     {% for record in records %}
-        <tr >
-            <td style="text-align: center;padding-left: 5px;padding-right: 5px;">{{record.name}}</td>
-            <td style="text-align: center;padding-left: 5px;padding-right: 5px;">{{record.amount}}</td>
-            <td style="text-align: center;max-width: 200px;text-align: center;padding-left: 5px;padding-right: 5px;">{{record.description}}</td>
-            <td style="text-align: center;padding-left: 5px;padding-right: 5px;">{{record.genre}}</td>
-            <td style="text-align: center;padding-left: 5px;padding-right: 5px;">{{record.price}}</td>
-            <td style="text-align: center;padding-left: 5px;padding-right: 5px;">{{record.date_added}}</td>
-        </tr>
+    <tr>
+      <td>{{record.name}}</td>
+      <td>{{record.amount}}</td>
+      <td class="description">{{record.description}}</td>
+      <td>{{record.genre}}</td>
+      <td>{{record.price}}</td>
+      <td>{{record.date_added}}</td>
+      <td>
+        <form method="GET" action="{% url 'main:add_one' record.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success btn-sm">+1</button>
+        </form>
+        <form method="GET" action="{% url 'main:remove_one' record.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">-1</button>
+        </form>
+        <form method="GET" action="{% url 'main:delete_record' record.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Del</button>
+        </form>
+      </td>
+    </tr>
     {% endfor %}
-</table>
+  </table>
+  
+  <br />
 
-<br />
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
 
-<a href="{% url 'main:create_record' %}">
-    <button>
-        Add New Record
-    </button>
-</a>
+  <a href="{% url 'main:create_record' %}" class="button">
+    Create Record
+  </a>
+
+  <a href="{% url 'main:logout' %}" class="button">
+    Logout
+  </a>
+
 
 {% endblock content %}
