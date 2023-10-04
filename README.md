@@ -164,7 +164,7 @@ Tugas 5
         2. `<body>`
             Tag ini berisi konten yang mau ditampilkan ke pengguna.
         3. `<h1>` hingga `<h6>`
-            Tag ini merupakan heading. Tag ini digunakan untuk menandai judul. '<h1>' merupakan jenis yang paling tinggi.
+            Tag ini merupakan heading. Tag ini digunakan untuk menandai judul. `<h1>` merupakan jenis yang paling tinggi.
         4. `<p>`
             Tag ini menandai teks paragraf.
         5. `<a>`
