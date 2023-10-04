@@ -1,64 +1,53 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-    <title>Login</title>
+<title>Login | Hilmeezy Records</title>
 {% endblock meta %}
 
 {% block content %}
+<nav class="navbar bg-body-tertiary">
+    <div>
+      <h1 style="font-size: 24px; font-weight: bold;">💿 Hilmeezy Records</h1>
+    </div>
+  </nav>
 
+
+<body style = "background-color: whitesmoke;">
 <div class = "login">
-
     <style>
     span {
     display: inline;
     }
-    a.button {
-        display: inline-block;
-        text-decoration: none;
-        background-color: transparent;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-family: 'Helvetica Neue', sans-serif;
-        border: 2px solid white;
-        margin-left: 10px;
-    }
     </style>
-
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    <span>Don't have an account yet?</span>
-    <a href="{% url 'main:register' %}" class="button">Register Now</a>
-
-
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card" style="width: 400px; height: 440px; align-items: center; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);border: 2px solid white;">
+                <div class="card-body">
+                    <h3 style="text-align: center;">Login</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; width: 300px; justify-content: center;">
+                        Username:
+                        <input type="text" name="username" class="form-control">
+                        Password:
+                        <input type="password" name="password" class="form-control">
+                        <input type="submit" value="Login">
+                    </div>
+                </div>
+                Don't have an account yet?
+                <a href="{% url 'main:register' %}" style="text-decoration: none;">Register Now</a>
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}  
+            </div>
+        </form>
+    </div>
+       
 </div>
+
+</body>
 
 {% endblock content %}

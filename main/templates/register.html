@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-    <title>Register</title>
+<title>Register | Hilmeezy Records</title>
 {% endblock meta %}
 
-{% block content %}  
+{% block content %}
+<nav class="navbar bg-body-tertiary">
+    <div>
+      <h1 style="font-size: 24px; font-weight: bold;">💿 Hilmeezy Records</h1>
+    </div>
+  </nav>
+<body style = "background-color: whitesmoke;">
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card" style="width: 400px; height: 440px; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);border: 2px solid white;">
+            <div class="card-body">
+                <h3 style="text-align: center;">Register</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 300px; justify-content: center;">
+                    Username:
+                    <input type="text" name="username" class="form-control">
+                    Password:
+                    <input type="password" name="password1" class="form-control">
+                    Confirm Password:
+                    <input type="password" name="password2" class="form-control">
+                    <input type="submit" value="Register">
+                </div>
+                <span>Already have an account?</span>
+                <a href="{% url 'main:login' %}" style="text-decoration: none;">Login</a>
+            </div>
+        </div>
+    </form>
+</div>
 
-<div class = "login">
-    
-    <h1>Register</h1>  
-
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
-</div>  
-
+{% if messages %}
+<ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} 
+</body>
 {% endblock content %}
+
+

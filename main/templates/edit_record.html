@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <nav class="navbar bg-body-tertiary">
     <div>
-        <h1 style="font-size: 24px; font-weight: bold;">💿 Hilmeezy Records</h1>
+      <h1 style="font-size: 24px; font-weight: bold;">💿 Hilmeezy Records</h1>
     </div>
-</nav>
+  </nav>
 
 <form method="POST" enctype="multipart/form-data" class="center-form">
     {% csrf_token %}
-    <h1>Add New Record</h1>
+    <h1 style="text-align: center;">Edit Record</h1>
     <table>
         {{ form.as_table }}
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Add Record" />
+                <input type="submit" value="Edit Record"/>
             </td>
         </tr>
     </table>

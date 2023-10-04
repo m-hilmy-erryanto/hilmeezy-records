@@ -1,22 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404, FileResponse
 from main.forms import RecordForm
 from django.urls import reverse
 from main.models import Record
-from django.http import HttpResponse
 from django.core import serializers
-from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import render, get_object_or_404, redirect
 
-# Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
     records = Record.objects.filter(user=request.user)
@@ -26,18 +19,25 @@ def show_main(request):
         'records': records,
         'last_login': request.COOKIES['last_login']
     }
-
     return render(request, "main.html", context)
 
 def create_record(request):
     form = RecordForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        record = form.save(commit=False)
-        record.user = request.user
-        record.save()
+        # record = form.save(commit=False)
+        user = request.user
+        name = form.cleaned_data['name']
+        amount = form.cleaned_data['amount']
+        description = form.cleaned_data['description']
+        genre = form.cleaned_data['genre']
+        price = form.cleaned_data['price']
+        picture = request.FILES['picture']
+        new_record = Record(user=user, name=name, amount=amount, description=description,
+                        price=price, genre=genre, picture=picture)
+        # record.save()
+        new_record.save()
         return HttpResponseRedirect(reverse('main:show_main'))
-
     context = {'form': form}
     return render(request, "create_record.html", context)
 
@@ -59,7 +59,6 @@ def show_json_by_id(request, id):
 
 def register(request):
     form = UserCreationForm()
-
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -90,20 +89,33 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-def add_one(request, record_id):
-    record = get_object_or_404(Record, pk=record_id)
-    record.amount += 1
-    record.save()
-    return redirect('main:show_main')
+def edit_record(request, id):
+    record = Record.objects.get(pk = id)
+    form = RecordForm(request.POST or None, instance=record)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    context = {'form': form}
+    return render(request, "edit_record.html", context)
 
-def remove_one(request, record_id):
-    record = get_object_or_404(Record, pk=record_id)
-    if record.amount > 0:
-        record.amount -= 1
-        record.save()
-    return redirect('main:show_main')
-
-def delete_record(request, record_id):
-    record = get_object_or_404(Record, pk=record_id)
+def delete_record(request, id):
+    record = Record.objects.get(pk = id)
     record.delete()
-    return redirect('main:show_main')
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def get_photo(request, nama_file_photo):
+    try:
+        file = open(f'photo/{nama_file_photo}', 'rb')
+        response = FileResponse(file)
+
+        ext = nama_file_photo.split('.')[-1]
+        if (ext == 'png'):
+            response['Content-Type'] = 'image/png'
+        elif (ext in ['jpg', 'jpeg']):
+            response['Content-Type'] = 'image/jpeg'
+        elif (ext == 'webp'):
+            response['Content-Type'] = 'image/webp'
+
+        return response
+    except:
+        return Http404()

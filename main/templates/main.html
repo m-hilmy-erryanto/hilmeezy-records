@@ -1,92 +1,78 @@
 {% extends 'base.html' %}
-{% block content %}
-<h1>{{ application_name}} Page</h1>
 
-<h3>Hilmy's record store</h3>
-<span>Welcome back, {{ name }}! You have stored {{ records|length }} records in this application</span>
+{% block meta %}
+<title>Hilmeezy Records</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    table {
-    border-spacing: 1rem;
-    }
-    th, td {
-      text-align: center;
-      padding: 5px;
-    }
-    th:nth-child(3) {
-      max-width: 200px;
-    }
-    td.description {
-    max-width: 200px;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: justify;
-    }
-    h1, h3, span {
-    font-family: "Helvetica", sans-serif;
-    }
-    a.button {
-        text-decoration: none;
-        background-color: transparent;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-family: 'Helvetica Neue', sans-serif;
-        border: 2px solid white;
-        margin-right: 10px;
-    }
-    img{
-      width: 10%;
-    }
-  </style>
-  
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Amount</th>
-      <th>Description</th>
-      <th>Genre</th>
-      <th>Price</th>
-      <th>Date Added</th>
-      <th>Action</th>
-    </tr>
-    {% for record in records %}
-    <tr>
-      <td>{{record.name}}</td>
-      <td>{{record.amount}}</td>
-      <td class="description">{{record.description}}</td>
-      <td>{{record.genre}}</td>
-      <td>{{record.price}}</td>
-      <td>{{record.date_added}}</td>
-      <td>
-        <form method="GET" action="{% url 'main:add_one' record.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-success btn-sm">+1</button>
-        </form>
-        <form method="GET" action="{% url 'main:remove_one' record.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm">-1</button>
-        </form>
-        <form method="GET" action="{% url 'main:delete_record' record.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm">Del</button>
-        </form>
-      </td>
-    </tr>
+.container{
+  width:500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  scale: 1.0;
+}
+.last-card{
+  background-color: whitesmoke !important;
+  width: 18rem; scale: 0.8;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid whitesmoke !important;
+}
+.button-navbar{
+  background-color: transparent;
+  text-decoration: none;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.center-text {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+}
+</style>
+{% endblock meta %}
+
+{% block content %}
+<nav class="navbar bg-body-tertiary">
+  <div>
+    <h1 style="font-size: 24px; font-weight: bold; padding-left: 50px;">💿 {{ application_name }}</h1>
+  </div>
+  <a href="{% url 'main:create_record' %}" class="button-navbar" style="margin-left: auto; margin-right: 20px">
+    Add New Record
+  </a>
+  <a href="{% url 'main:logout' %}" style="padding-right: 40px;">
+    <i class="fa fa-sign-out fa-2x text-danger text-black" aria-hidden="true"></i>
+  </a>
+</nav>
+<br>
+<h3 class = "center-text" style="margin-top: 20px;"> Welcome back, {{ name }}! You have stored {{ records|length }} records in this application</h3>
+<div class = container>
+  {% for record in records %}
+    <div class="card{%if forloop.last%} last-card{%endif%}" style="width: 18rem; scale: 0.8;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);border: 2px solid white;">
+      <img src="{{record.picture.url}}" style = "aspect-ratio: 1; object-fit: cover; scale: 0.8">
+      <div class="card-body">
+        <h5 class="card-title" style="font-weight: bold;">{{record.name}}</h5>
+        <p>Genre: {{record.genre}} 
+          <br>Price: ${{record.price}}  |  Amount: {{record.amount}}
+          <br>Date Added: {{record.date_added}}
+        </p>
+        <div style="text-align: center;">
+        <a href="{% url 'main:edit_record' record.pk %}" style="text-decoration: none;font-size: 24px;">
+          📝
+      </a>
+      <a href="{% url 'main:delete_record' record.pk %}" style="text-decoration: none; font-size: 24px;">
+        🗑️
+        </a>
+      </div>
+      </div>
+    </div>
     {% endfor %}
-  </table>
-  
-  <br />
-
-  <h5>Sesi terakhir login: {{ last_login }}</h5>
-
-  <a href="{% url 'main:create_record' %}" class="button">
-    Create Record
-  </a>
-
-  <a href="{% url 'main:logout' %}" class="button">
-    Logout
-  </a>
-
-
+</div>
+<span class="center-text" style="margin-bottom: 20px;">Last login session: {{ last_login }}</span>
 {% endblock content %}

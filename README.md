@@ -139,3 +139,44 @@ Tugas 4
         Saya membuat tombol "+1" dan "-1" yang terletak di kolom action. Kedua tombol ini menjalankan fungsi yang sesuai dengan masing-masing, +1 menjalankan fungsi add_one, -1 menjalankan remove_one.
     2. Tombol dan fungsi untuk menghapus objek:
         Sama juga seperti +1 dan -1, tombol Del yang terletak di kolom action bisa meremove object. Tombol ini menjalankan fungsi delete_record.
+
+Tugas 5
+- Pengimplementasian Checklist
+    - Kustomisasi desain pada template HTML:
+        1. Kustomisasi halaman login, register, dan tambah inventori
+            Saya menggunakan card pada halaman login dan register, saya buat tampilan keduanya mirip, untuk edit dan add record saya merapikannya agar ada di tengah
+        2. Kustomisasi halaman daftar inventori
+            Saya menambahkan navbar, memindahkan tombol-tombol, dan mengganti tabel records dengan container berisi card dengan display flex dan flex-wrap agar lebih rapi
+
+- Jelaskan manfaat dari setiap selector dan kapan waktu yang tepat untuk menggunakannya.
+    Selector dalam CSS ada tiga yakni Element Selector, Class Selector, dan ID Selector.
+        1. Element Selector
+            Element selector digunakan untuk mengubah properti dengan tag HTML yang sama. Element selector digunakan apabila kita ingin membuat karakteristik yang sama untuk elemen tertentu. 
+        2. Class Selector
+            Class selector digunakan untuk mengelompokkan elemen dengan karakteristik yang sama. Class selector digunakan apabila kita ingin mengubah properti dari kelompok-kelompok elemen dengan ubahan yang sama.
+        3. ID Selector
+            ID selector digunakan untuk mengubah properti yang memiliki ID unik. ID Selector kita gunakan apabila kita ingin merubah 1 properti saja.
+
+- Jelaskan HTML5 Tag yang kamu ketahui.
+    Berikut beberapa HTML5 Tag yang saya ketahui:
+        1. '<head>'
+            Tag ini berisi informasi seperti title halaman, dan informasi meta lainnya.
+        2. '<body>'
+            Tag ini berisi konten yang mau ditampilkan ke pengguna.
+        3. '<h1>' hingga '<h6>'
+            Tag ini merupakan heading. Tag ini digunakan untuk menandai judul. '<h1>' merupakan jenis yang paling tinggi.
+        4. '<p>'
+            Tag ini menandai teks paragraf.
+        5. '<a>'
+            Tag ini menandai hyperlink.
+
+- Jelaskan perbedaan antara margin dan padding.
+    Margin digunakan untuk mengatur area di sekitar border, sedangkan padding digunakan mengatur area di sekitar konten
+
+- Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan salah satunya?
+    Berikut perbedaan antara Tailwind dan Bootstrap:
+        1. Tailwind cenderung lebih fleksibel dan memberikan developer kontrol yang lebih banyak dibandingkan bootstrap karena bootstrap komponen-komponennya sudah dibuat sebelumnya
+        2. Tailwind ukuran filenya lebih ringan dibandingkan bootstrap
+        3. Bootstrap lebih ramah pemula untuk dipelajari dibanding Tailwind karena komponen di bootstrap sudah dibuat terlebih dahulu
+        
+    Pemilihan penggunaan Tailwind dan Bootstrap tergantung kebutuhan kita. Apabila kita masih pemula dan memiliki waktu terbatas, disarankan menggunakan Bootstrap. Apabila kita menginginkan kustomisasi tinggi dan kode yang ringan, disarankan menggunakan Tailwind
