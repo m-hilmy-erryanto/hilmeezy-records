@@ -159,15 +159,15 @@ Tugas 5
 
 - Jelaskan HTML5 Tag yang kamu ketahui.
     Berikut beberapa HTML5 Tag yang saya ketahui:
-        1. '<head>'
+        1. `<head>`
             Tag ini berisi informasi seperti title halaman, dan informasi meta lainnya.
-        2. '<body>'
+        2. `<body>`
             Tag ini berisi konten yang mau ditampilkan ke pengguna.
-        3. '<h1>' hingga '<h6>'
+        3. `<h1>` hingga `<h6>`
             Tag ini merupakan heading. Tag ini digunakan untuk menandai judul. '<h1>' merupakan jenis yang paling tinggi.
-        4. '<p>'
+        4. `<p>`
             Tag ini menandai teks paragraf.
-        5. '<a>'
+        5. `<a>`
             Tag ini menandai hyperlink.
 
 - Jelaskan perbedaan antara margin dan padding.
