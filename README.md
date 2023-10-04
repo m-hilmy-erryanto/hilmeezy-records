@@ -147,7 +147,7 @@ Tugas 5
             Saya menggunakan card pada halaman login dan register, saya buat tampilan keduanya mirip, untuk edit dan add record saya merapikannya agar ada di tengah
         2. Kustomisasi halaman daftar inventori
             Saya menambahkan navbar, memindahkan tombol-tombol, dan mengganti tabel records dengan container berisi card dengan display flex dan flex-wrap agar lebih rapi
-            ![inventori]https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/Screenshot%20(544).png
+            ![inventori](https://github.com/m-hilmy-erryanto/hilmeezy-records/blob/main/images/Screenshot%20(544).png)
 
 - Jelaskan manfaat dari setiap selector dan kapan waktu yang tepat untuk menggunakannya.
     Selector dalam CSS ada tiga yakni Element Selector, Class Selector, dan ID Selector.
