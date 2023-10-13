@@ -10,4 +10,5 @@ class Record(models.Model):
     genre = models.CharField(max_length=255)
     price = models.IntegerField()
     date_added = models.DateField(auto_now_add=True)
-    picture = models.ImageField(null=True, upload_to = "photo/")
+    image = models.URLField(blank=True, null=True)
+    # picture = models.ImageField(null=True, upload_to = "photo/")

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse, Http404, FileResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404, FileResponse, HttpResponseNotFound
 from main.forms import RecordForm
 from django.urls import reverse
 from main.models import Record
@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 @login_required(login_url='/login')
@@ -21,23 +22,35 @@ def show_main(request):
     }
     return render(request, "main.html", context)
 
+# def create_record(request):
+#     form = RecordForm(request.POST or None)
+
+#     if form.is_valid() and request.method == "POST":
+#         # record = form.save(commit=False)
+#         user = request.user
+#         name = form.cleaned_data['name']
+#         amount = form.cleaned_data['amount']
+#         description = form.cleaned_data['description']
+#         genre = form.cleaned_data['genre']
+#         price = form.cleaned_data['price']
+#         picture = request.FILES['picture']
+#         new_record = Record(user=user, name=name, amount=amount, description=description,
+#                         price=price, genre=genre, picture=picture)
+#         # record.save()
+#         new_record.save()
+#         return HttpResponseRedirect(reverse('main:show_main'))
+#     context = {'form': form}
+#     return render(request, "create_record.html", context)
+
 def create_record(request):
     form = RecordForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        # record = form.save(commit=False)
-        user = request.user
-        name = form.cleaned_data['name']
-        amount = form.cleaned_data['amount']
-        description = form.cleaned_data['description']
-        genre = form.cleaned_data['genre']
-        price = form.cleaned_data['price']
-        picture = request.FILES['picture']
-        new_record = Record(user=user, name=name, amount=amount, description=description,
-                        price=price, genre=genre, picture=picture)
-        # record.save()
-        new_record.save()
+        record = form.save(commit=False)
+        record.user = request.user
+        record.save()
         return HttpResponseRedirect(reverse('main:show_main'))
+
     context = {'form': form}
     return render(request, "create_record.html", context)
 
@@ -103,19 +116,40 @@ def delete_record(request, id):
     record.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
 
-def get_photo(request, nama_file_photo):
-    try:
-        file = open(f'photo/{nama_file_photo}', 'rb')
-        response = FileResponse(file)
+# def get_photo(request, nama_file_photo):
+#     try:
+#         file = open(f'photo/{nama_file_photo}', 'rb')
+#         response = FileResponse(file)
 
-        ext = nama_file_photo.split('.')[-1]
-        if (ext == 'png'):
-            response['Content-Type'] = 'image/png'
-        elif (ext in ['jpg', 'jpeg']):
-            response['Content-Type'] = 'image/jpeg'
-        elif (ext == 'webp'):
-            response['Content-Type'] = 'image/webp'
+#         ext = nama_file_photo.split('.')[-1]
+#         if (ext == 'png'):
+#             response['Content-Type'] = 'image/png'
+#         elif (ext in ['jpg', 'jpeg']):
+#             response['Content-Type'] = 'image/jpeg'
+#         elif (ext == 'webp'):
+#             response['Content-Type'] = 'image/webp'
 
-        return response
-    except:
-        return Http404()
+#         return response
+#     except:
+#         return Http404()
+
+def get_record_json(request):
+    record_item = Record.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', record_item))
+
+@csrf_exempt
+def add_record_ajax(request):
+    if request.method == 'POST':
+        user = request.user
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        price = request.POST.get("price")
+        genre = request.POST.get("genre")
+        new_record = Record(user=user, name=name, amount=amount, description=description,
+                            price=price, genre=genre)
+        new_record.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
