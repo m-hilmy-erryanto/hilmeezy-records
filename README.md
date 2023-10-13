@@ -1,8 +1,11 @@
-Muhammad Hilmy Erryanto - 2206025905
-PBP F
-Link Adaptable : https://hilmeezy-records.adaptable.app/
+# Tugas Individu PBP
 
-Tugas 2
+Muhammad Hilmy Erryanto - 2206025905
+PBP F - TEN
+Link Adaptable : https://hilmeezy-records.adaptable.app/
+Link PaaS PBP  : http://muhammad-hilmy22-tugas.pbp.cs.ui.ac.id/
+
+## Tugas 2
 - Pengimplementasian Checklist
     1. Membuat proyek Django baru:
         Diawali dengan membuat direktori baru (Tugas 2) dan menginisiasi git di direktori tersebut. Lalu, saya membuat repository baru di github (hilmeezy-records) dan menghubungkan direktori lokal dengan repository baru. Lalu setelahnya saya membuat virtual environment di direktori tersebut dan mengaktifkannya. Lalu saya membuat file requirements.txt yang berisi semua dependensi dan menginstallnya dengan menjalankan "pip install -r requirements.txt". Terakhir, saya menjalankan perintah "django-admin startproject hilmeezy_records ."
@@ -61,7 +64,7 @@ Tugas 2
         - ViewModel: Komponen yang mempersiapkan data yang akan ditampilan di View dan menghubungkannya dengan Model
     - MVVM digunakan dalam application development bagian UI (User Interface)
 
-Tugas 3
+## Tugas 3
 - Pengimplementasian Checklist
     (note: saya mengganti semua kata Item pada proyek saya dengan Record agar lebih spesifik dengan konteks toko record saya. )
     1. Membuat input form:
@@ -100,7 +103,7 @@ Tugas 3
 - Bonus:
     Saya berhasil menambahkan pesan dan menampilkannya di atas tabel data. Pesan yang ditampilkan adalah "You have stored x records in this application". Hal ini diimplementasikan dengan menambahkan line <span>You have stored {{ records|length }} records in this application</span> di main.html dengan {{ records|length}} untuk mencari banyak data dalam tabel.
 
-Tugas 4
+## Tugas 4
 - Pengimplementasian Checklist
     1. Mengimplementasikan fungsi registrasi, login, dan logout:
         Sebelumnya saya mengubah main.html menjadi restricted agar pengguna yang sudah login saja yang bisa mengaksesnya.
@@ -140,7 +143,7 @@ Tugas 4
     2. Tombol dan fungsi untuk menghapus objek:
         Sama juga seperti +1 dan -1, tombol Del yang terletak di kolom action bisa meremove object. Tombol ini menjalankan fungsi delete_record.
 
-Tugas 5
+## Tugas 5
 - Pengimplementasian Checklist
     - Kustomisasi desain pada template HTML:
         1. Kustomisasi halaman login, register, dan tambah inventori
@@ -181,3 +184,32 @@ Tugas 5
         3. Bootstrap lebih ramah pemula untuk dipelajari dibanding Tailwind karena komponen di bootstrap sudah dibuat terlebih dahulu
         
     Pemilihan penggunaan Tailwind dan Bootstrap tergantung kebutuhan kita. Apabila kita masih pemula dan memiliki waktu terbatas, disarankan menggunakan Bootstrap. Apabila kita menginginkan kustomisasi tinggi dan kode yang ringan, disarankan menggunakan Tailwind
+
+## Tugas 6
+- Pengimplementasian Checklist
+    - AJAX GET
+        Saya mengganti implementasi card di html dengan AJAX GET dengan cara, membuat fungsi get_record_json di views dan menggunakannya di fungsi pada script untuk pengambilan data secara asinkronus. Lalu masih di script saya membuat fungsi refreshProducts yang mengambil data dari fungsi sebelumnya dengan await untuk mendapatkan data dari hasil ajax fungsi sebelumnya. Lalu saya membuat `<div class = "container" id="card"> </div>` yang akan menampilkan semua cardnya.
+
+    - AJAX POST
+        Saya membuat fungsi add_record_ajax di views dan menambahkan url nya. Lalu saya membuat modal ajaxnya. Lalu saya membuat fungsi addRecord di script untuk mengambil semua input form dan menjalankan fungsi add_record_ajax untuk membuat record baru. Setelah addRecord dijalankan, fungsi refreshProducts akan dijalankan juga agar record yang baru muncul. 
+
+    - collectstatic
+        Saya menambahkan "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" di setting.py lalu menjalankan perintah collectstatic di terminal.
+
+    - git add, commit, push.
+        Saya menjalankan ketiga perintah di terminal.
+
+    - deployment ke ke PaaS pbp.cs.ui.ac.id.
+        Saya menambahkan konfigurasi deployment dan membuat file-file baru seperti Procfile, pbp-deploy.yml, .dockerignore, dan Dockerfile. Lalu saya membuat tiga secret key di github.
+
+- Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+    Perbedaan mendasar antara asynchronnous dengan synchronous programming adalah dari cara eksekusi tugas-tugasnya. Dalam async, tugas-tugas dapat dieksekusi secara bersamaan sehingga program dapat menjalankan tugas lain selama tugas async sedang menunggu hasil operasi I/O atau tugas lain yang memerlukan waktu. Sebaliknya Dalam pemrograman sync, tugas-tugas dieksekusi secara berurutan sehingga saat tugas tertentu sedang menunggu operasi I/O atau operasi berat lainnya, seluruh eksekusi program terhenti yang membuat program menjadi lambat.
+
+- Apa itu paradigma event-driven programming dan contohnya pada tugas ini.
+    Event-driven programming adalah pendekatan dimana program dieksekusi berdarkan event yang terdapat di program tersebut, seperti interaksi user, masukan keyboard, klik mouse, atau event lainnya. Contohnya pada kode saya adalah add record yang menggunakan AJAX POST yang akan menampilkan modal untuk menambahkan record saat tombol add new record ditekan.
+
+- Jelaskan penerapan asynchronous programming pada AJAX.
+    AJAX memungkinkan kita untuk mengupdate sebagian data di halaman web tanpa harus melakukan reload webpagenya. Salah satu cara menerapkan async pada AJAX adalah dengan menambahkan atribut "async" pada fungsi, yang akan menandakan bahwa fungsi tersebut mampu mengembalikan nilai secara asinkronus.
+
+- Fetch API vs library jQuery.
+    Keduanya merupakan cara untuk melakukan pengiriman data pada aplikasi web. Akan tetapi, Fetch API lebih baru dan menggunakan Promise sehingga lebih simpel dibanding library JQuery. Oleh karena itu, menurut saya yang lebih baik digunakan adalah Fetch API karena lebih simpel.
