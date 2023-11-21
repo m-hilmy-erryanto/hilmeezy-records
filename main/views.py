@@ -137,6 +137,7 @@ def delete_record(request, id):
 #         return response
 #     except:
 #         return Http404()
+#
 
 def get_record_json(request):
     record_item = Record.objects.filter(user=request.user)
