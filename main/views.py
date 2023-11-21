@@ -70,6 +70,7 @@ def show_json_by_id(request, id):
     record = Record.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", record), content_type="application/json")
 
+@csrf_exempt
 def register(request):
     form = UserCreationForm()
     if request.method == "POST":
@@ -81,6 +82,7 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
+@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -146,8 +148,9 @@ def add_record_ajax(request):
         description = request.POST.get("description")
         price = request.POST.get("price")
         genre = request.POST.get("genre")
+        image = request.POST.get("image")
         new_record = Record(user=user, name=name, amount=amount, description=description,
-                            price=price, genre=genre)
+                            price=price, genre=genre, image=image)
         new_record.save()
 
         return HttpResponse(b"CREATED", status=201)
