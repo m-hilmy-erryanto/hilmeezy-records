@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main, create_record, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, delete_record, edit_record, add_record_ajax, get_record_json
+from main.views import show_main, create_record, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, delete_record, edit_record, add_record_ajax, get_record_json, create_product_flutter
 app_name = 'main'
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     # path('photo/<str:nama_file_photo>', get_photo, name='get_photo'),
     path('create-record-ajax/', add_record_ajax, name='add_record_ajax'),
     path('get-record/', get_record_json, name='get_record_json'),
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
 ]

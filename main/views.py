@@ -1,5 +1,6 @@
+import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse, Http404, FileResponse, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, Http404, FileResponse, HttpResponseNotFound, JsonResponse
 from main.forms import RecordForm
 from django.urls import reverse
 from main.models import Record
@@ -62,6 +63,7 @@ def show_json(request):
     record = Record.objects.all()
     return HttpResponse(serializers.serialize("json", record), content_type="application/json")
 
+
 def show_xml_by_id(request, id):
     record = Record.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", record), content_type="application/xml")
@@ -98,6 +100,7 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)
 
+@csrf_exempt
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
@@ -156,3 +159,24 @@ def add_record_ajax(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Record.objects.create(
+            user = request.user,
+            name = data["name"],
+            amount = int(data["amount"]),
+            price = int(data["price"]),
+            description = data["description"],
+            genre = data["genre"],
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
